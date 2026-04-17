@@ -39,13 +39,11 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Generate job XML files.")
     parser.add_argument("--output-dir", required=True)
     parser.add_argument("--version", default=os.environ.get("VERSION", "unknown"))
-    parser.add_argument("--source-commit", default="unknown")
-    parser.add_argument("--release-version", default="unknown")
     args = parser.parse_args()
 
     source_tag = args.version
-    source_commit = args.source_commit
-    release_version = args.release_version
+    source_commit = os.environ.get("SOURCE_COMMIT", "unknown")
+    release_version = os.environ.get("RELEASE_VERSION", "unknown")
     generated_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
     output_dir = Path(args.output_dir)
